@@ -1,0 +1,80 @@
+.container {
+  position: relative;
+  &::before {
+    content: "";
+    display: block;
+    width: 90%;
+    height: 1rem;
+    background: rgb(163, 161, 161);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  width: 100%;
+  height: 250rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  .imgWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 90%;
+    }
+  }
+  .infoWrapper {
+    padding: 30rem 50rem 0 0;
+    h2 {
+      font-size: 35rem;
+    }
+    .description{
+      height: 90rem;
+      line-height: 40rem;
+      font-size: 30rem;
+      color: rgb(113, 113, 113);
+    }
+    .priceWrapper{
+      display: flex;
+      justify-content: space-between;
+      .price{
+        position: relative;
+        font-size: 35rem;
+        margin-left: 15rem;
+        &::before{
+          content: '$';
+          display: block;
+          position: absolute;
+          left: -17rem;
+          bottom: 5rem;
+          font-size: 15rem;
+        }
+      }
+      .buttonGroup{
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        width: 130rem;
+        button{
+          justify-self: center;
+          align-self: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: none;
+          width: 40rem;
+          height: 40rem;
+          border-radius: 20rem;
+          &.add{
+            background: #f1ca67;
+          }
+        }
+        .amount{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 30rem;
+        }
+      }
+    }
+  }
+}
