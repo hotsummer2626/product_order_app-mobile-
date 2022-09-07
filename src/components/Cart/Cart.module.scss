@@ -1,0 +1,49 @@
+.container {
+  position: fixed;
+  left: 50%;
+  bottom: 30rem;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 80rem;
+  border-radius: 40rem;
+  background: #3c3a3c;
+  .shoppingCartIcon {
+    transform: translateX(-10rem);
+    img {
+      width: 120rem;
+    }
+  }
+  .totalPrice {
+    .price {
+      position: relative;
+      margin-left: 15rem;
+      color: #fff;
+      font-size: 50rem;
+      font-weight: bold;
+      &::before {
+        content: "$";
+        display: block;
+        position: absolute;
+        left: -17rem;
+        bottom: 10rem;
+        font-size: 25rem;
+        color: #fff;
+      }
+    }
+  }
+  .buttons {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    .checkout {
+      border: none;
+      border-radius: 40rem;
+      height: 100%;
+      padding: 0 25rem;
+      background: #f8bc02;
+      font-size: 40rem;
+    }
+  }
+}

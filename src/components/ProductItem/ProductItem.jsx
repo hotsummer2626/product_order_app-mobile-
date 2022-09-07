@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ProductItem.module.scss";
-import { products } from "../../../products/products";
+import { products } from "../../products/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
