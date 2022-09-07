@@ -8,6 +8,7 @@ const Cart = () => {
       <div className={styles.shoppingCartIcon}>
         <img src={paperShoppingCart} alt="paper shopping bag" />
       </div>
+      <div className={styles.totalAmount}>10</div>
       <div className={styles.totalPrice}>
         <span className={styles.price}>123</span>
       </div>

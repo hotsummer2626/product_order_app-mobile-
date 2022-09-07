@@ -15,6 +15,18 @@
       width: 120rem;
     }
   }
+  .totalAmount {
+    position: absolute;
+    left: 63rem;
+    top: -18rem;
+    width: 40rem;
+    height: 40rem;
+    line-height: 40rem;
+    border-radius: 20rem;
+    background: red;
+    color: #fff;
+    text-align: center;
+  }
   .totalPrice {
     .price {
       position: relative;
