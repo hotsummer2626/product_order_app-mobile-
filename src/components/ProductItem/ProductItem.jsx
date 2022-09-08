@@ -1,27 +1,26 @@
 import React from "react";
 import styles from "./ProductItem.module.scss";
-import { products } from "../../products/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const ProductItem = () => {
+const ProductItem = ({ name, img, description, price, amount }) => {
   return (
     <div className={styles.container}>
       <div className={styles.imgWrapper}>
-        <img src={products[0].img} alt="baby formula" />
+        <img src={img} alt="baby formula" />
       </div>
       <div className={styles.infoWrapper}>
-        <h2>a2 step 1</h2>
+        <h2>{name}</h2>
         <div className={styles.description}>
-          <p>{products[0].description}</p>
+          <p>{description}</p>
         </div>
         <div className={styles.priceWrapper}>
-          <span className={styles.price}>243</span>
+          <span className={styles.price}>{price}</span>
           <div className={styles.buttonGroup}>
             <button>
               <FontAwesomeIcon icon={faMinus} />
             </button>
-            <span className={styles.amount}>6</span>
+            <span className={styles.amount}>{amount}</span>
             <button className={styles.add}>
               <FontAwesomeIcon icon={faPlus} />
             </button>
