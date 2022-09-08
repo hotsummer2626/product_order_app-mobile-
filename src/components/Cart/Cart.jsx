@@ -24,10 +24,20 @@ const Cart = () => {
       </div>
       <div className={styles.totalAmount}>{totalAmount}</div>
       <div className={styles.totalPrice}>
-        <span className={styles.price}>{totalPrice.toFixed(1)}</span>
+        {totalAmount === 0 ? (
+          <span className={styles.noItems}>No Items</span>
+        ) : (
+          <span className={styles.price}>{totalPrice.toFixed(1)}</span>
+        )}
       </div>
       <div className={styles.buttons}>
-        <button className={styles.checkout}>Checkout</button>
+        <button
+          className={`${styles.checkout} ${
+            totalAmount === 0 ? styles.disable : ""
+          }`}
+        >
+          Checkout
+        </button>
       </div>
     </div>
   );

@@ -28,6 +28,11 @@
     text-align: center;
   }
   .totalPrice {
+    .noItems{
+      font-size: 40rem;
+      font-weight: bold;
+      color: rgb(178, 178, 178);
+    }
     .price {
       position: relative;
       margin-left: 15rem;
@@ -56,6 +61,10 @@
       padding: 0 25rem;
       background: #f8bc02;
       font-size: 40rem;
+      &.disable{
+        color: rgb(202, 202, 202);
+        background: #787778;
+      }
     }
   }
 }

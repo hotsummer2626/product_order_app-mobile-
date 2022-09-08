@@ -60,6 +60,9 @@ const productListSlice = createSlice({
   },
 });
 
-export const { setProductListByKeyWord, addProductToCart,removeProductFromCart } =
-  productListSlice.actions;
+export const {
+  setProductListByKeyWord,
+  addProductToCart,
+  removeProductFromCart,
+} = productListSlice.actions;
 export const { reducer: productListReducer } = productListSlice;
