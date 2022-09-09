@@ -7,22 +7,23 @@ import {
   addProductToCart,
   removeProductFromCart,
 } from "../../redux/slices/productList";
+import { close } from "../../redux/slices/backdrop";
 
-const ProductItem = ({ product, closeBackdrop, hasDescription }) => {
+const ProductItem = ({ product, hasDescription }) => {
   const { name, img, description, price, amount } = product;
   const {
     productList: { cartProducts },
   } = useSelector((state) => state);
-
   const dispatch = useDispatch();
+
   const removeProductHandler = () => {
     dispatch(removeProductFromCart(product));
     const totalAmount = cartProducts.reduce(
       (prev, curr) => prev + curr.amount,
       0
     );
-    if (closeBackdrop && totalAmount === 1) {
-      closeBackdrop(false);
+    if (totalAmount === 1) {
+      dispatch(close(["cartDetails"]));
     }
   };
 

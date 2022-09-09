@@ -3,14 +3,14 @@ import styles from "./Confirm.module.scss";
 import Backdrop from "../../Backdrop/Backdrop";
 import { useDispatch } from "react-redux";
 import { clearAllProductFromCart } from "../../../redux/slices/productList";
+import { close } from "../../../redux/slices/backdrop";
 
-const Confirm = ({ setIsConfirmShow, setIsCartDetailsShow }) => {
+const Confirm = () => {
   const dispatch = useDispatch();
 
   const confirmHandler = () => {
     dispatch(clearAllProductFromCart());
-    setIsConfirmShow(false);
-    setIsCartDetailsShow(false);
+    dispatch(close(["confirm",'cartDetails']));
   };
   return (
     <Backdrop className={styles.confirmOuter} isPropagation={false}>
@@ -19,7 +19,7 @@ const Confirm = ({ setIsConfirmShow, setIsCartDetailsShow }) => {
         <div className={styles.buttonGroup}>
           <button
             className={styles.cancel}
-            onClick={() => setIsConfirmShow(false)}
+            onClick={() => dispatch(close(["confirm"]))}
           >
             Cancel
           </button>

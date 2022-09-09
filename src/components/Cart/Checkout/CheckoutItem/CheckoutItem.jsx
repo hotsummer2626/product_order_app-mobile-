@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./CheckoutItem.module.scss";
-import { products } from "../../../../products/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,8 +7,9 @@ import {
   addProductToCart,
   removeProductFromCart,
 } from "../../../../redux/slices/productList";
+import { close } from "../../../../redux/slices/backdrop";
 
-const CheckoutItem = ({ product, setIsCheckoutShow, setIsCartDetailsShow }) => {
+const CheckoutItem = ({ product }) => {
   const {
     productList: { cartProducts },
   } = useSelector((state) => state);
@@ -22,8 +22,7 @@ const CheckoutItem = ({ product, setIsCheckoutShow, setIsCartDetailsShow }) => {
       0
     );
     if (totalAmount === 1) {
-      setIsCheckoutShow(false);
-      setIsCartDetailsShow(false);
+      dispatch(close(["checkout",'cartDetails']));
     }
   };
 
@@ -31,7 +30,7 @@ const CheckoutItem = ({ product, setIsCheckoutShow, setIsCartDetailsShow }) => {
   return (
     <div className={styles.container}>
       <div className={styles.imgWrapper}>
-        <img src={products[0].img} alt="baby formula" />
+        <img src={product.img} alt="baby formula" />
       </div>
       <div className={styles.checkoutDetails}>
         <h2>{product.name}</h2>

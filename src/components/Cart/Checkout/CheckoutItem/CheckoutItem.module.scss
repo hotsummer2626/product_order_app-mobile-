@@ -20,13 +20,13 @@
     justify-content: center;
     align-items: center;
     img {
-      width: 100%;
+      width: 80%;
     }
   }
   .checkoutDetails {
     padding: 20rem;
     h2 {
-      font-size: 40rem;
+      font-size: 35rem;
       margin-bottom: 20rem;
     }
     .priceWrapper {
@@ -58,8 +58,7 @@
         }
       }
       .subTotalPrice {
-        font-size: 40rem;
-        font-weight: bold;
+        font-size: 35rem;
         &::before {
           content: "$";
           font-size: 30rem;

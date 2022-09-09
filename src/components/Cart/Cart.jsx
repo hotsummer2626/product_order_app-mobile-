@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Cart.module.scss";
 import paperShoppingCart from "../../assets/shopping_cart.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CartDetails from "./CartDetails/CartDetails";
 import Confirm from "./Confirm/Confirm";
 import Checkout from "./Checkout/Checkout";
+import { open, toggle } from "../../redux/slices/backdrop";
 
 const Cart = () => {
-  const [isCartDetailsShow, setIsCartDetailsShow] = useState(false);
-  const [isConfirmShow, setIsConfirmShow] = useState(false);
-  const [isCheckoutShow, setIsCheckoutShow] = useState(false);
   const {
     productList: { cartProducts },
+    backdrop: { isCartDetailsShow, isConfirmShow, isCheckoutShow },
   } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const totalAmount = cartProducts.reduce(
     (prev, curr) => prev + curr.amount,
@@ -24,36 +24,22 @@ const Cart = () => {
   );
 
   const onCartClickHandler = () => {
-    if (cartProducts.length === 0) return;
-    setIsCartDetailsShow(!isCartDetailsShow);
+    if (cartProducts.length === 0 || isCheckoutShow) return;
+    dispatch(toggle(["cartDetails"]));
   };
 
   const checkoutHandler = (e) => {
     if (totalAmount === 0) return;
     e.stopPropagation();
-    setIsCheckoutShow(true);
+    dispatch(open(["checkout"]));
   };
 
   return (
     <div className={styles.container} onClick={onCartClickHandler}>
-      {isCartDetailsShow && (
-        <CartDetails
-          setIsCartDetailsShow={setIsCartDetailsShow}
-          setIsConfirmShow={setIsConfirmShow}
-        />
-      )}
-      {isConfirmShow && (
-        <Confirm
-          setIsConfirmShow={setIsConfirmShow}
-          setIsCartDetailsShow={setIsCartDetailsShow}
-        />
-      )}
-      {isCheckoutShow && (
-        <Checkout
-          setIsCheckoutShow={setIsCheckoutShow}
-          setIsCartDetailsShow={setIsCartDetailsShow}
-        />
-      )}
+      {isCartDetailsShow && <CartDetails />}
+      {isConfirmShow && <Confirm />}
+      {isCheckoutShow && <Checkout />}
+
       <div className={styles.shoppingCartIcon}>
         <img src={paperShoppingCart} alt="paper shopping bag" />
       </div>

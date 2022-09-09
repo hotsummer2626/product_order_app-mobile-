@@ -4,12 +4,14 @@ import Backdrop from "../../Backdrop/Backdrop";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import ProductItem from "../../ProductItem/ProductItem";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { open } from "../../../redux/slices/backdrop";
 
-const CartDetails = ({ setIsCartDetailsShow, setIsConfirmShow }) => {
+const CartDetails = () => {
   const {
     productList: { cartProducts },
   } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const onClickCartDetailsHandler = (e) => {
     e.stopPropagation();
@@ -22,7 +24,7 @@ const CartDetails = ({ setIsCartDetailsShow, setIsConfirmShow }) => {
           <h2>Cart Details</h2>
           <div
             className={styles.clearCart}
-            onClick={() => setIsConfirmShow(true)}
+            onClick={() => dispatch(open(["confirm"]))}
           >
             <FontAwesomeIcon icon={faTrashCan} />
             <span>Clear Cart</span>
@@ -32,9 +34,8 @@ const CartDetails = ({ setIsCartDetailsShow, setIsConfirmShow }) => {
           {cartProducts.map((product) => (
             <ProductItem
               key={product.id}
-              hasDescription={false}
               product={product}
-              closeBackdrop={setIsCartDetailsShow}
+              hasDescription={false}
             />
           ))}
         </div>
