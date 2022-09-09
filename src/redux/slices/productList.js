@@ -57,6 +57,17 @@ const productListSlice = createSlice({
         state.cartProducts[productIndexInCartProducts].amount -= 1;
       }
     },
+    clearAllProductFromCart(state, action) {
+      state.allProducts = state.allProducts.map((product) => ({
+        ...product,
+        amount: 0,
+      }));
+      state.filterProducts = state.filterProducts.map((product) => ({
+        ...product,
+        amount: 0,
+      }));
+      state.cartProducts = [];  
+    },
   },
 });
 
@@ -64,5 +75,6 @@ export const {
   setProductListByKeyWord,
   addProductToCart,
   removeProductFromCart,
+  clearAllProductFromCart,
 } = productListSlice.actions;
 export const { reducer: productListReducer } = productListSlice;

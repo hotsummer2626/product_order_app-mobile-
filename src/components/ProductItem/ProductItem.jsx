@@ -8,10 +8,23 @@ import {
   removeProductFromCart,
 } from "../../redux/slices/productList";
 
-const ProductItem = (product) => {
+const ProductItem = ({ product, closeBackdrop }) => {
   const { name, img, description, price, amount } = product;
+  const {
+    productList: { cartProducts },
+  } = useSelector((state) => state);
 
   const dispatch = useDispatch();
+  const removeProductHandler = () => {
+    dispatch(removeProductFromCart(product));
+    const totalAmount = cartProducts.reduce(
+      (prev, curr) => prev + curr.amount,
+      0
+    );
+    if (closeBackdrop && totalAmount === 1) {
+      closeBackdrop(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -28,9 +41,7 @@ const ProductItem = (product) => {
           <div className={styles.buttonGroup}>
             {amount !== 0 ? (
               <>
-                <button
-                  onClick={() => dispatch(removeProductFromCart(product))}
-                >
+                <button onClick={removeProductHandler}>
                   <FontAwesomeIcon icon={faMinus} />
                 </button>
                 <span className={styles.amount}>{amount}</span>

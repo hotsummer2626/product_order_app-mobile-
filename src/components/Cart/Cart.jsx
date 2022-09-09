@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Cart.module.scss";
 import paperShoppingCart from "../../assets/shopping_cart.png";
 import { useSelector } from "react-redux";
+import CartDetails from "./CartDetails/CartDetails";
+import Confirm from "./Confirm/Confirm";
 
 const Cart = () => {
+  const [isCartDetailsShow, setIsCartDetailsShow] = useState(false);
+  const [isConfirmShow, setIsConfirmShow] = useState(false);
   const {
     productList: { cartProducts },
   } = useSelector((state) => state);
@@ -17,8 +21,25 @@ const Cart = () => {
     0
   );
 
+  const onCartClickHandler = () => {
+    if (cartProducts.length === 0) return;
+    setIsCartDetailsShow(!isCartDetailsShow);
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={onCartClickHandler}>
+      {isCartDetailsShow && (
+        <CartDetails
+          setIsCartDetailsShow={setIsCartDetailsShow}
+          setIsConfirmShow={setIsConfirmShow}
+        />
+      )}
+      {isConfirmShow && (
+        <Confirm
+          setIsConfirmShow={setIsConfirmShow}
+          setIsCartDetailsShow={setIsCartDetailsShow}
+        />
+      )}
       <div className={styles.shoppingCartIcon}>
         <img src={paperShoppingCart} alt="paper shopping bag" />
       </div>

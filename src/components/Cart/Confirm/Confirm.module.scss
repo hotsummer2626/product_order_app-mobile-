@@ -1,0 +1,40 @@
+.confirmOuter {
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .container {
+    width: 600rem;
+    height: 350rem;
+    border-radius: 40rem;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h2 {
+      font-size: 40rem;
+      margin-bottom: 60rem;
+    }
+    .buttonGroup {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      button {
+        border: none;
+        width: 200rem;
+        height: 70rem;
+        border-radius: 40rem;
+        font-size: 30rem;
+        font-weight: bold;
+        &.cancel {
+          border: 1rem solid #000;
+          background: #fff;
+        }
+        &.confirm {
+          background: #f9bc02;
+        }
+      }
+    }
+  }
+}
