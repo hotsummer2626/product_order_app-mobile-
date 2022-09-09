@@ -32,6 +32,7 @@ const CartDetails = ({ setIsCartDetailsShow, setIsConfirmShow }) => {
           {cartProducts.map((product) => (
             <ProductItem
               key={product.id}
+              hasDescription={false}
               product={product}
               closeBackdrop={setIsCartDetailsShow}
             />

@@ -4,10 +4,12 @@ import paperShoppingCart from "../../assets/shopping_cart.png";
 import { useSelector } from "react-redux";
 import CartDetails from "./CartDetails/CartDetails";
 import Confirm from "./Confirm/Confirm";
+import Checkout from "./Checkout/Checkout";
 
 const Cart = () => {
   const [isCartDetailsShow, setIsCartDetailsShow] = useState(false);
   const [isConfirmShow, setIsConfirmShow] = useState(false);
+  const [isCheckoutShow, setIsCheckoutShow] = useState(false);
   const {
     productList: { cartProducts },
   } = useSelector((state) => state);
@@ -26,6 +28,12 @@ const Cart = () => {
     setIsCartDetailsShow(!isCartDetailsShow);
   };
 
+  const checkoutHandler = (e) => {
+    if (totalAmount === 0) return;
+    e.stopPropagation();
+    setIsCheckoutShow(true);
+  };
+
   return (
     <div className={styles.container} onClick={onCartClickHandler}>
       {isCartDetailsShow && (
@@ -37,6 +45,12 @@ const Cart = () => {
       {isConfirmShow && (
         <Confirm
           setIsConfirmShow={setIsConfirmShow}
+          setIsCartDetailsShow={setIsCartDetailsShow}
+        />
+      )}
+      {isCheckoutShow && (
+        <Checkout
+          setIsCheckoutShow={setIsCheckoutShow}
           setIsCartDetailsShow={setIsCartDetailsShow}
         />
       )}
@@ -56,8 +70,9 @@ const Cart = () => {
           className={`${styles.checkout} ${
             totalAmount === 0 ? styles.disable : ""
           }`}
+          onClick={checkoutHandler}
         >
-          Checkout
+          {isCheckoutShow ? "Pay Now" : "Checkout"}
         </button>
       </div>
     </div>

@@ -11,7 +11,11 @@ const ProductList = () => {
     <div className={styles.container}>
       {filterProducts.length !== 0 ? (
         filterProducts.map((product) => (
-          <ProductItem key={product.id} product={product}/>
+          <ProductItem
+            key={product.id}
+            hasDescription={true}
+            product={product}
+          />
         ))
       ) : (
         <div className={styles.noFound}>No Products have been found!!!</div>

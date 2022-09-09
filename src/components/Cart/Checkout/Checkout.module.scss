@@ -1,0 +1,46 @@
+.checkoutOuter {
+  background: #f3f2f3;
+  .closeIcon {
+    display: flex;
+    align-items: center;
+    height: 100rem;
+    padding-left: 40rem;
+    font-size: 50rem;
+    color: #000;
+  }
+  .checkoutDetailsWrapper {
+    background: #fff;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 40rem;
+    header {
+      display: flex;
+      align-items: center;
+      height: 100rem;
+      padding: 0 50rem;
+      border-bottom: 1rem solid rgb(199, 199, 199);
+      h2 {
+        font-size: 40rem;
+      }
+    }
+    .checkoutList{
+      height: 800rem;
+      overflow: auto;
+    }
+    footer{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 130rem;
+      padding: 0 70rem;
+      font-size: 40rem;
+      font-weight: bold;
+      span{
+        &::before{
+          content: '$';
+          font-size: 30rem;
+        }
+      }
+    }
+  }
+}

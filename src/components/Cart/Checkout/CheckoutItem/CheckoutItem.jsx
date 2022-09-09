@@ -1,57 +1,46 @@
 import React from "react";
-import styles from "./ProductItem.module.scss";
+import styles from "./CheckoutItem.module.scss";
+import { products } from "../../../../products/products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addProductToCart,
   removeProductFromCart,
-} from "../../redux/slices/productList";
+} from "../../../../redux/slices/productList";
 
-const ProductItem = ({ product, closeBackdrop, hasDescription }) => {
-  const { name, img, description, price, amount } = product;
+const CheckoutItem = ({ product, setIsCheckoutShow, setIsCartDetailsShow }) => {
   const {
     productList: { cartProducts },
   } = useSelector((state) => state);
-
   const dispatch = useDispatch();
+
   const removeProductHandler = () => {
     dispatch(removeProductFromCart(product));
     const totalAmount = cartProducts.reduce(
       (prev, curr) => prev + curr.amount,
       0
     );
-    if (closeBackdrop && totalAmount === 1) {
-      closeBackdrop(false);
+    if (totalAmount === 1) {
+      setIsCheckoutShow(false);
+      setIsCartDetailsShow(false);
     }
   };
 
+  const subTotalPrice = (product.price * product.amount).toFixed(1);
   return (
     <div className={styles.container}>
       <div className={styles.imgWrapper}>
-        <img src={img} alt="baby formula" />
+        <img src={products[0].img} alt="baby formula" />
       </div>
-      <div className={styles.infoWrapper}>
-        <h2>{name}</h2>
-        <div className={styles.description}>
-          {hasDescription && <p>{description}</p>}
-        </div>
+      <div className={styles.checkoutDetails}>
+        <h2>{product.name}</h2>
         <div className={styles.priceWrapper}>
-          <span className={styles.price}>{price}</span>
           <div className={styles.buttonGroup}>
-            {amount !== 0 ? (
-              <>
-                <button onClick={removeProductHandler}>
-                  <FontAwesomeIcon icon={faMinus} />
-                </button>
-                <span className={styles.amount}>{amount}</span>
-              </>
-            ) : (
-              <>
-                <div></div>
-                <div></div>
-              </>
-            )}
+            <button onClick={removeProductHandler}>
+              <FontAwesomeIcon icon={faMinus} />
+            </button>
+            <span className={styles.amount}>{product.amount}</span>
             <button
               className={styles.add}
               onClick={() => dispatch(addProductToCart(product))}
@@ -59,10 +48,11 @@ const ProductItem = ({ product, closeBackdrop, hasDescription }) => {
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
+          <span className={styles.subTotalPrice}>{subTotalPrice}</span>
         </div>
       </div>
     </div>
   );
 };
 
-export default ProductItem;
+export default CheckoutItem;
